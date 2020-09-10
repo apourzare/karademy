@@ -3,10 +3,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from article import views as article_views
+from karademy import views as main_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('article.urls'))
+    path('', main_view.index, name='home'),
+    path('article/', include('article.urls'))
 ]
 
 if settings.DEBUG:

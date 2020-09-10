@@ -19,7 +19,7 @@
                   <div class="img-bg" style="background-image: url('{{ article.thumbnail.url }}')"></div>
                   <div class="contents text-right">
                     <span class="mb-2">{{ article.ro_titre }}</span>
-                    <h2 class="text-right"><a href="article/{{article.id}}/">{{ article.title }}</a></h2>
+                    <h2 class="text-right"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
                     <p class="mb-3 text-right">{{ article.body|truncatewords:50 }}</p>
 
                     <div class="post-meta">

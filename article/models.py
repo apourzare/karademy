@@ -1,5 +1,7 @@
 from account.models import User
 from django.db import models
+from django.urls import reverse
+from jalali_date import datetime2jalali, date2jalali
 
 
 class Category(models.Model):
@@ -34,7 +36,7 @@ class Article(models.Model):
     )
     ro_titre = models.CharField(max_length=200, verbose_name='رو تیتر', null=True, blank=True)
     title = models.CharField(max_length=200, verbose_name='عنوان مقاله')
-    slug = models.SlugField(allow_unicode=True, verbose_name='لینک یکتا')
+    slug = models.SlugField(allow_unicode=True, verbose_name='لینک یکتا', unique=True)
     abstruct = models.TextField(verbose_name='خلاصه', null=True, blank=True)
     status = models.CharField(choices=STATUS_CHOICES, verbose_name='وضعیت انتشار', max_length=10)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='نویسنده')
@@ -46,6 +48,12 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated = models.DateTimeField(auto_now=True, verbose_name='آخرین ویرایش')
 
+    def j_created(self):
+        return datetime2jalali(self.created).strftime('%y/%m/%d')
+
+    j_created.short_description = 'تاریخ ایجاد'
+
+    jcreated = property(j_created)
     class Meta:
         ordering = ('created',)
         verbose_name = 'مقاله'
@@ -53,5 +61,8 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("article:article-detail", kwargs={'slug': self.slug})
 
     objects = ArticleManager()
