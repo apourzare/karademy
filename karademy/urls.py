@@ -7,7 +7,8 @@ from karademy import views as main_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_view.index, name='home'),
+    # path('', main_view.index, name='home'),
+    path('', main_view.HomeView.as_view(), name='home'),
     path('article/', include('article.urls'))
 ]
 

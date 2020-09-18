@@ -18,6 +18,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
 class ArticleManager(models.Manager):
     def published(self, number=None):
         if number == None:
@@ -52,10 +53,10 @@ class Article(models.Model):
         return datetime2jalali(self.created).strftime('%y/%m/%d')
 
     j_created.short_description = 'تاریخ ایجاد'
-
     jcreated = property(j_created)
+
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
 

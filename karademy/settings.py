@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     'account.apps.AccountConfig',
     'jalali_date',
+    'crispy_forms',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # defaults
 JALALI_DATE_DEFAULTS = {

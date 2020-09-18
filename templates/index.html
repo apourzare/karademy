@@ -12,7 +12,7 @@
     <div class="site-section py-0">
       <div dir="ltr" class="owl-carousel hero-slide owl-style">
 
-          {% for article in articles %}
+          {% for article in article_list %}
             <div class="site-section">
               <div class="container">
                 <div class="half-post-entry d-block d-lg-flex bg-light">
@@ -51,11 +51,11 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="post-entry-1">
-                  <a href="post-single.html"><img src="images/img_h_1.jpg" alt="Image" class="img-fluid"></a>
-                  <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                  <a href="{{ new_article.get_absolute_url }}"><img src="{{ new_article.thumbnail.url }}" alt="Image" class="img-fluid"></a>
+                  <h2><a href="{{ new_article.get_absolute_url }}">{{ new_article.title }}</a></h2>
+                  <p>{{ new_article.body|truncatewords:50  }}</p>
                   <div class="post-meta">
-                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                    <span class="d-block"><a href="#">{{ new_article.author.get_full_name }}</a> در <a href="#">{{ new_article.category }}</a></span>
                     <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
 
             {% for article in trend %}
               <div class="trend-entry d-flex">
-                <div class="number align-self-start">01</div>
+                <div class="number align-self-start">{{ forloop.counter }}</div>
                 <div class="trend-contents">
                   <h2><a href="article/{{article.id}}/">{{ article.title }}</a></h2>
                   <div class="post-meta">
